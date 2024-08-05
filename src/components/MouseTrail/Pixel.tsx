@@ -2,20 +2,16 @@ import { useMemo } from "react";
 import "styles/Pixel.css";
 
 export default function Pixel({
-  posX,
-  posY,
-  xVelocity,
-  yVelocity,
+  pos,
+  vel,
 }: {
-  posX: number;
-  posY: number;
-  xVelocity: number;
-  yVelocity: number;
+  pos: [number, number];
+  vel: [number, number];
 }) {
-  const shiftedYPos = useMemo(() => posY + Math.random() * 6 - 3, [posY]);
-  const shiftedXPos = useMemo(() => posX + Math.random() * 6 - 3, [posX]);
-  const translateX = useMemo(() => xVelocity * 20, [xVelocity]);
-  const translateY = useMemo(() => yVelocity * 30, [yVelocity]);
+  const shiftedXPos = useMemo(() => pos[0] + Math.random() * 6 - 3, [pos]);
+  const shiftedYPos = useMemo(() => pos[1] + Math.random() * 6 - 3, [pos]);
+  const translateX = useMemo(() => vel[0] * 20, [vel]);
+  const translateY = useMemo(() => vel[1] * 30, [vel]);
 
   return (
     <div

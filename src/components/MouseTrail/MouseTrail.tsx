@@ -31,13 +31,7 @@ export default function MouseTrail({
 
       // create new pixel
       const newPixel = (
-        <Pixel
-          key={random}
-          posX={mousePosition[0]}
-          posY={mousePosition[1]}
-          xVelocity={mouseVelocity[0]}
-          yVelocity={mouseVelocity[1]}
-        />
+        <Pixel key={random} pos={mousePosition} vel={mouseVelocity} />
       );
 
       // add pixel to array
