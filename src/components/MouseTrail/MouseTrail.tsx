@@ -11,22 +11,20 @@ export default function MouseTrail({
   const [mousePixels, setMousePixels] = useState<JSX.Element[]>([]);
   const [mouseVelocity, setMouseVelocity] = useState<[number, number]>([1, 1]);
   const [pixelCadenceCount, setPixelCadenceCount] = useState(0);
-  const [pixelXDir, setPixelXDir] = useState(-1);
 
   useEffect(() => {
     // calculate new mouse velocity (just see if moving up, down, left, right)
-    setMouseVelocity(() => {
+    setMouseVelocity((prev) => {
       const randomY = Math.round(Math.random());
       const yDir = randomY === 0 ? -1 : 1;
-      return [pixelXDir, yDir];
+      return [prev[0] * -1, yDir];
     });
 
     setPixelCadenceCount((count) => (count + 1) % pixelCadence);
-  }, [mousePosition, pixelXDir]);
+  }, [mousePosition]);
 
   const createMouseTrail = useCallback(() => {
     if (pixelCadenceCount === 0) {
-      setPixelXDir((prev) => prev * -1);
       const random = Math.random() * 10000;
 
       // create new pixel
