@@ -1,35 +1,19 @@
-import React, { useCallback, useState } from "react";
-import { MemoCanvas } from "components/Scene/Canvas";
+import { useRef } from "react";
+import { MemoCanvas } from "components/3d/Scene/Canvas";
+import { MemoBook } from "components/2d/Book";
 import MouseTrail from "components/MouseTrail/MouseTrail";
 
 import "styles/App.css";
 
-/*
- * code to check orientation and ask to rotate
- * do I even need this? test out three js scene on mobile first
-document.addEventListener("orientationchange", function(event){
-    switch(window.orientation) 
-    {  
-        case -90: case 90:
-            // Device is in landscape mode 
-            break; 
-        default:
-            // Device is in portrait mode
-    }
-});
-*/
+const use3d = false; // feature flag to switch between 2d and 3d
 
 function App() {
-  const [mousePosition, setMousePosition] = useState<[number, number]>([0, 0]);
-
-  const onMouseMove = useCallback((event: React.MouseEvent<HTMLElement>) => {
-    setMousePosition([event.clientX, event.clientY]);
-  }, []);
+  const mainContainerRef = useRef(null);
 
   return (
-    <main onMouseMove={onMouseMove}>
-      <MouseTrail mousePosition={mousePosition} />
-      <MemoCanvas />
+    <main ref={mainContainerRef}>
+      <MouseTrail parentRef={mainContainerRef} />
+      {use3d ? <MemoCanvas /> : <MemoBook />}
     </main>
   );
 }

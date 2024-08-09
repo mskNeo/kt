@@ -3,7 +3,6 @@ import { useRef, useState, memo } from "react";
 import { useFrame, ThreeElements } from "@react-three/fiber";
 
 function Box(props: ThreeElements["mesh"]) {
-  console.log("box made");
   const meshRef = useRef<THREE.Mesh>(null!);
 
   const [hover, setHover] = useState(false);

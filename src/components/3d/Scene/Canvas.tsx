@@ -5,7 +5,7 @@ import { MemoBox } from "./Box";
 export const MemoCanvas = React.memo(() => {
   return (
     <>
-      <Canvas>
+      <Canvas frameloop="demand">
         <ambientLight intensity={0.2} />
         <spotLight
           position={[10, 10, 10]}

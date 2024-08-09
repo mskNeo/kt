@@ -1,16 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
+import { RefObject, useCallback, useEffect, useState } from "react";
 import Pixel from "./Pixel";
 
 const pixelCadence = 4; // capture 1 pixel out of <pixelCadence> pixels
 
 export default function MouseTrail({
-  mousePosition,
+  parentRef,
 }: {
-  mousePosition: [number, number];
+  parentRef: RefObject<HTMLElement>;
 }) {
+  const [mousePosition, setMousePosition] = useState<[number, number]>([0, 0]);
   const [mousePixels, setMousePixels] = useState<JSX.Element[]>([]);
   const [mouseVelocity, setMouseVelocity] = useState<[number, number]>([1, 1]);
   const [pixelCadenceCount, setPixelCadenceCount] = useState(0);
+
+  const onMouseMove = useCallback((event: MouseEvent) => {
+    setMousePosition([event.clientX, event.clientY]);
+  }, []);
+
+  useEffect(() => {
+    const parentContainer = parentRef?.current;
+    parentContainer?.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      parentContainer?.removeEventListener("mousemove", onMouseMove);
+    };
+  }, [parentRef]);
 
   useEffect(() => {
     // calculate new mouse velocity (just see if moving up, down, left, right)
