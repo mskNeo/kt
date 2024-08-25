@@ -2,4 +2,6 @@
   height: max-content;
   width: max-content;
   cursor: pointer;
+  transition: all ease 2s;
+  transform-origin: left;
 }

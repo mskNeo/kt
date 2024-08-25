@@ -10,10 +10,12 @@
 }
 
 .pixel {
+  position: absolute;
+  border-radius: 50%;
   height: 10px;
   width: 10px;
   background-color: whitesmoke;
   animation: fade forwards 0.95s ease-out;
-  --translate-x-distance: 15px;
-  --translate-y-distance: 15px;
+  pointer-events: none;
+  z-index: 1000;
 }
