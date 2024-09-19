@@ -1,9 +1,0 @@
-main {
-  width: 100dvw;
-  height: 100dvh;
-  background: black;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
