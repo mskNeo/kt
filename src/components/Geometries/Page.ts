@@ -20,7 +20,7 @@ const PageGeometry = new BoxGeometry(
   BOOK_PAGE_HEIGHT,
   BOOK_PAGE_DEPTH,
   BOOK_PAGE_SEGMENTS
-).translate(BOOK_PAGE_WIDTH / 2 + BOOK_SPINE_WIDTH / 2, 0, 0);
+).translate(BOOK_PAGE_WIDTH / 2, 0, 0);
 
 const position = PageGeometry.attributes.position;
 const vertex = new Vector3();
