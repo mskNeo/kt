@@ -1,21 +1,20 @@
 import { useRef } from "react";
-import { MemoCanvas } from "components/3d/Scene/Canvas";
-import { MemoBook } from "components/2d/Book";
 import MouseTrail from "components/MouseTrail/MouseTrail";
 
 import "styles/App.css";
+import { MemoCanvas } from "components/Canvas";
+import { useAtom } from "jotai";
+import { isOpenAtom } from "store/BookStore";
 
-const use3d = false; // feature flag to switch between 2d and 3d
-
-function App() {
+export default function App() {
   const mainContainerRef = useRef(null);
+  const [open, setOpen] = useAtom(isOpenAtom);
 
   return (
     <main ref={mainContainerRef}>
       <MouseTrail parentRef={mainContainerRef} />
-      {use3d ? <MemoCanvas /> : <MemoBook />}
+      <MemoCanvas />
+      <button onClick={() => setOpen(!open)}>{open ? "Close" : "Open"}</button>
     </main>
   );
 }
-
-export default App;

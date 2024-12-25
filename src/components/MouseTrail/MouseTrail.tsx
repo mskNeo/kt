@@ -53,5 +53,9 @@ export default function MouseTrail({
 
   useEffect(createMouseTrail, [createMouseTrail]);
 
-  return <div id="mouse-trail">{mousePixels}</div>;
+  return (
+    <div id="mouse-trail" style={{ pointerEvents: "none" }}>
+      {mousePixels}
+    </div>
+  );
 }

@@ -12,6 +12,8 @@ export default defineConfig({
       assets: "/src/assets",
       hooks: "/src/hooks",
       contexts: "/src/contexts",
+      constants: "/src/constants",
+      store: "/src/store",
     },
   },
 });
