@@ -10,6 +10,6 @@ const CoverGeometry = new BoxGeometry(
   BOOK_COVER_WIDTH,
   BOOK_COVER_HEIGHT,
   BOOK_COVER_DEPTH
-).translate(BOOK_COVER_WIDTH / 2 + BOOK_SPINE_WIDTH / 2, 0, 0);
+).translate(BOOK_COVER_WIDTH / 2 - BOOK_SPINE_WIDTH / 2, 0, 0);
 
 export { CoverGeometry };

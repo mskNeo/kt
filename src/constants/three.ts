@@ -33,7 +33,7 @@ export const BOOK_PAGE_SEGMENT_WIDTH = BOOK_PAGE_WIDTH / BOOK_PAGE_SEGMENTS;
 // Book Spine Dimensions
 export const BOOK_SPINE_HEIGHT = BOOK_COVER_HEIGHT;
 export const BOOK_SPINE_WIDTH = BOOK_COVER_DEPTH;
-export const BOOK_SPINE_DEPTH = 2 * (BOOK_PAGE_DEPTH + BOOK_COVER_DEPTH);
+export const BOOK_SPINE_DEPTH = 2 * BOOK_PAGE_DEPTH;
 
 // constants for book turning animations
 export const LERP_FACTOR = 0.05;

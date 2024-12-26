@@ -50,9 +50,7 @@ PageGeometry.setAttribute(
   new Float32BufferAttribute(skinWeights, 4)
 );
 
-const pageTexture = new TextureLoader().load("textures/paper.webp", () =>
-  console.info("loaded texture")
-);
+const pageTexture = new TextureLoader().load("textures/paper.webp");
 
 const pageMaterials = [
   // right

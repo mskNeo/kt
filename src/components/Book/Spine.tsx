@@ -6,17 +6,16 @@ import { useTexture } from "@react-three/drei";
 import { COVER_COLOR } from "constants/three";
 
 const Spine = forwardRef((props, ref: React.Ref<Group<Object3DEventMap>>) => {
-  const colorMap = useTexture("textures/fabric_leather_02_diff_1k.jpg");
-  // const maps = useTexture({
-  //   map: "textures/fabric_leather_02_diff_1k.jpg",
-  //   // displacementMap: "textures/fabric_leather_02_diff_1k.jpg",
-  //   roughnessMap: "textures/fabric_leather_02_rough_1k-min.jpg",
-  // });
+  const textureMap = useTexture("textures/fabric_leather_02_rough_1k-min.jpg");
 
   return (
     <group {...props} ref={ref}>
       <mesh geometry={SpineGeometry}>
-        <meshStandardMaterial map={colorMap} color={COVER_COLOR} />
+        <meshStandardMaterial
+          map={textureMap}
+          roughnessMap={textureMap}
+          color={COVER_COLOR}
+        />
       </mesh>
     </group>
   );
