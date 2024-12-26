@@ -5,7 +5,7 @@ import { SpineGeometry } from "components/Geometries/Spine";
 import { useTexture } from "@react-three/drei";
 
 const Spine = forwardRef((props, ref: React.Ref<Group<Object3DEventMap>>) => {
-  const colorMap = useTexture("textures/fabric_leather_uv_img.jpg");
+  const colorMap = useTexture("textures/fabric_leather_02_diff_1k.jpg");
   // const maps = useTexture({
   //   map: "textures/fabric_leather_02_diff_1k.jpg",
   //   // displacementMap: "textures/fabric_leather_02_diff_1k.jpg",

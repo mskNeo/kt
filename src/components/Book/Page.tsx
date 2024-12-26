@@ -6,15 +6,12 @@ import {
   Bone,
   BoxGeometry,
   MeshBasicMaterial,
-  Object3D,
   Object3DEventMap,
   Skeleton,
-  SkeletonHelper,
   SkinnedMesh,
 } from "three";
-import { useHelper } from "@react-three/drei";
 
-const Page = forwardRef(
+const PageSet = forwardRef(
   (
     props,
     ref: React.Ref<
@@ -44,8 +41,6 @@ const Page = forwardRef(
       return skinMesh;
     }, []);
 
-    useHelper(ref as React.MutableRefObject<Object3D>, SkeletonHelper);
-
     return (
       <group {...props}>
         <primitive object={manualSkinnedMesh} ref={ref} />
@@ -54,4 +49,4 @@ const Page = forwardRef(
   }
 );
 
-export const MemoPage = React.memo(Page);
+export const MemoPageSet = React.memo(PageSet);

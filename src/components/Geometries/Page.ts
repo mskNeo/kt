@@ -5,7 +5,6 @@ import {
   BOOK_PAGE_SEGMENT_WIDTH,
   BOOK_PAGE_SEGMENTS,
   BOOK_PAGE_WIDTH,
-  BOOK_SPINE_WIDTH,
 } from "constants/three";
 import {
   BoxGeometry,

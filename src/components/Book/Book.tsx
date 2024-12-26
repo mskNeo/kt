@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import "@react-three/fiber";
 import { MemoCover } from "./Cover";
-import { MemoPage } from "./Page";
+import { MemoPageSet } from "./Page";
 import { useFrame } from "@react-three/fiber";
 import {
   BoxGeometry,
   Group,
   MathUtils,
-  Matrix4,
   MeshBasicMaterial,
   Object3DEventMap,
   SkinnedMesh,
@@ -30,34 +29,59 @@ function Book() {
 
   const groupRef = useRef<Group>(null);
   const frontCoverRef = useRef<Group>(null);
+  const backCoverRef = useRef<Group>(null);
   const spineRef = useRef<Group>(null);
   const frontPagesRef =
     useRef<SkinnedMesh<BoxGeometry, MeshBasicMaterial[], Object3DEventMap>>(
       null
     );
+  const backPagesRef =
+    useRef<SkinnedMesh<BoxGeometry, MeshBasicMaterial[], Object3DEventMap>>(
+      null
+    );
 
   useEffect(() => {
-    if (!frontCoverRef.current) return;
-    // translate origin to edge of spine
+    if (
+      !frontCoverRef.current ||
+      !backCoverRef.current ||
+      !groupRef.current ||
+      !frontPagesRef.current ||
+      !backPagesRef.current
+    )
+      return;
+    // position everything properly
     frontCoverRef.current.translateX(BOOK_SPINE_WIDTH);
-    frontCoverRef.current.translateZ(
-      BOOK_PAGE_DEPTH / 2 + BOOK_COVER_DEPTH / 2
-    );
+    frontCoverRef.current.translateZ(BOOK_PAGE_DEPTH + BOOK_COVER_DEPTH / 2);
+    backCoverRef.current.translateX(BOOK_SPINE_WIDTH);
+    backCoverRef.current.translateZ(-BOOK_PAGE_DEPTH - BOOK_COVER_DEPTH / 2);
+    frontPagesRef.current.translateZ(BOOK_PAGE_DEPTH / 2);
+    backPagesRef.current.translateZ(-BOOK_PAGE_DEPTH / 2);
+    groupRef.current.translateX(-BOOK_COVER_WIDTH / 2);
   }, []);
 
   // here, we want to control the animations for both the cover and page
   useFrame(() => {
     if (
       !frontCoverRef.current ||
+      !backCoverRef.current ||
       !frontPagesRef.current ||
+      !backPagesRef.current ||
       !spineRef.current ||
       !groupRef.current
     )
       return;
 
-    const pageBones = frontPagesRef.current.skeleton.bones;
+    const frontPageBones = frontPagesRef.current.skeleton.bones;
+    const backPageBones = backPagesRef.current.skeleton.bones;
     const targetRotation = open ? -Math.PI / 2 : 0;
     const verticalRotation = open ? -Math.PI / 4 : 0;
+    const groupTranslation = open ? 0 : -BOOK_COVER_WIDTH / 2;
+
+    groupRef.current.position.x = MathUtils.lerp(
+      groupRef.current.position.x,
+      groupTranslation,
+      LERP_FACTOR
+    );
 
     // rotate
     groupRef.current.rotation.y = MathUtils.lerp(
@@ -75,25 +99,44 @@ function Book() {
       targetRotation,
       LERP_FACTOR
     );
+    backCoverRef.current.rotation.y = MathUtils.lerp(
+      backCoverRef.current.rotation.y,
+      -targetRotation,
+      LERP_FACTOR
+    );
 
     // rotate bones
-    for (let i = 0; i < pageBones.length; i++) {
-      const target = pageBones[i];
+    for (let i = 0; i < frontPageBones.length; i++) {
+      const frontTarget = frontPageBones[i];
+      const backTarget = backPageBones[i];
 
       const insideCurveIntensity = i < 10 ? Math.sin(i * 0.3 + 0.25) : 0;
       const rotationAngle =
         INSIDE_CURVE_STRENGTH * insideCurveIntensity * targetRotation;
+      const backRotationAngle = -1 * rotationAngle;
 
-      target.rotation.y = MathUtils.lerp(
-        target.rotation.y,
+      frontTarget.rotation.y = MathUtils.lerp(
+        frontTarget.rotation.y,
         rotationAngle,
         LERP_FACTOR
       );
 
+      backTarget.rotation.y = MathUtils.lerp(
+        backTarget.rotation.y,
+        backRotationAngle,
+        LERP_FACTOR
+      );
+
       if (i > 10) {
-        target.position.z = MathUtils.lerp(
-          target.position.z,
+        frontTarget.position.z = MathUtils.lerp(
+          frontTarget.position.z,
           open ? 0.09 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+
+        backTarget.position.z = MathUtils.lerp(
+          backTarget.position.z,
+          open ? -0.09 * (i / BOOK_PAGE_SEGMENTS) : 0,
           LERP_FACTOR
         );
       }
@@ -102,10 +145,11 @@ function Book() {
 
   return (
     <group ref={groupRef}>
-      <MemoCover isFront={true} ref={frontCoverRef} />
-      <MemoPage ref={frontPagesRef} />
+      <MemoCover ref={frontCoverRef} />
+      <MemoPageSet ref={frontPagesRef} />
+      <MemoPageSet ref={backPagesRef} />
       <MemoSpine ref={spineRef} />
-      {/* <MemoCover /> */}
+      <MemoCover ref={backCoverRef} />
     </group>
   );
 }
