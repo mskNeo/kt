@@ -108,8 +108,7 @@ function Book() {
       const frontTarget = frontPageBones[i];
       const backTarget = backPageBones[i];
 
-      const insideCurveIntensity =
-        i < Math.floor(BOOK_PAGE_SEGMENTS / 4) ? Math.sin(i / 5 + 0.15) : 0.1;
+      const insideCurveIntensity = i < 12 ? Math.sin(i / 5 + 0.1) : 0.1;
       const rotationAngle =
         INSIDE_CURVE_STRENGTH * insideCurveIntensity * targetRotation;
 
@@ -125,58 +124,25 @@ function Book() {
         LERP_FACTOR
       );
 
-      if (i > 10 && i < 15) {
-        frontTarget.position.z = MathUtils.lerp(
-          frontTarget.position.z,
-          open ? 0.001 * (i / BOOK_PAGE_SEGMENTS) : 0,
-          LERP_FACTOR
-        );
-
-        backTarget.position.z = MathUtils.lerp(
-          backTarget.position.z,
-          open ? -0.001 * (i / BOOK_PAGE_SEGMENTS) : 0,
-          LERP_FACTOR
-        );
-      } else if (i >= 15 && i < 35) {
-        frontTarget.position.z = MathUtils.lerp(
-          frontTarget.position.z,
-          open ? -0.0001 * (Math.sqrt(i) / BOOK_PAGE_SEGMENTS) : 0,
-          LERP_FACTOR
-        );
-        backTarget.position.z = MathUtils.lerp(
-          backTarget.position.z,
-          open ? 0.0001 * (Math.sqrt(i) / BOOK_PAGE_SEGMENTS) : 0,
-          LERP_FACTOR
-        );
-      } else if (i >= 35) {
+      if (i >= 46) {
         frontTarget.position.x = MathUtils.lerp(
           frontTarget.position.x,
-          open ? 0.07 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          open ? 0.12 * (i / BOOK_PAGE_SEGMENTS) : 0,
           LERP_FACTOR
         );
         backTarget.position.x = MathUtils.lerp(
           backTarget.position.x,
-          open ? 0.07 * (i / BOOK_PAGE_SEGMENTS) : 0,
-          LERP_FACTOR
-        );
-        frontTarget.position.y = MathUtils.lerp(
-          frontTarget.position.y,
-          open ? -0.015 * (i / BOOK_PAGE_SEGMENTS) : 0,
-          LERP_FACTOR
-        );
-        backTarget.position.y = MathUtils.lerp(
-          backTarget.position.y,
-          open ? -0.015 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          open ? 0.12 * (i / BOOK_PAGE_SEGMENTS) : 0,
           LERP_FACTOR
         );
         frontTarget.rotation.y = MathUtils.lerp(
           frontTarget.rotation.y,
-          open ? (0.12 * i) / BOOK_PAGE_SEGMENTS : 0,
+          open ? (0.2 * i) / BOOK_PAGE_SEGMENTS : 0,
           LERP_FACTOR
         );
         backTarget.rotation.y = MathUtils.lerp(
           backTarget.rotation.y,
-          open ? (-0.12 * i) / BOOK_PAGE_SEGMENTS : 0,
+          open ? (-0.2 * i) / BOOK_PAGE_SEGMENTS : 0,
           LERP_FACTOR
         );
       }
