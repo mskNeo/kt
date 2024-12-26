@@ -1,4 +1,4 @@
-import { makePageTexture } from "components/Textures/PageTexture";
+import { makePageSideTexture } from "components/Textures/PageTexture";
 import {
   BOOK_PAGE_DEPTH,
   BOOK_PAGE_HEIGHT,
@@ -10,6 +10,8 @@ import {
   BoxGeometry,
   Float32BufferAttribute,
   MeshBasicMaterial,
+  MeshStandardMaterial,
+  TextureLoader,
   Uint16BufferAttribute,
   Vector3,
 } from "three";
@@ -48,30 +50,34 @@ PageGeometry.setAttribute(
   new Float32BufferAttribute(skinWeights, 4)
 );
 
+const pageTexture = new TextureLoader().load("textures/paper.webp", () =>
+  console.info("loaded texture")
+);
+
 const pageMaterials = [
   // right
   new MeshBasicMaterial({
-    map: makePageTexture(Math.PI / 2),
+    map: makePageSideTexture(Math.PI / 2),
   }),
   // left (spine)
   new MeshBasicMaterial({
-    color: "green",
+    color: "#f2dcb1",
   }),
   // top
   new MeshBasicMaterial({
-    map: makePageTexture(),
+    map: makePageSideTexture(),
   }),
   // bottom
   new MeshBasicMaterial({
-    map: makePageTexture(),
+    map: makePageSideTexture(),
   }),
   // front
   new MeshBasicMaterial({
-    color: "#f2dcb1",
+    map: pageTexture,
   }),
   // back
   new MeshBasicMaterial({
-    color: "#f2dcb1",
+    map: pageTexture,
   }),
 ];
 

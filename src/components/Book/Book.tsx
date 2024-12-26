@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "@react-three/fiber";
 import { MemoCover } from "./Cover";
 import { MemoPageSet } from "./Page";
@@ -50,9 +50,7 @@ function Book() {
     )
       return;
     // position everything properly
-    frontCoverRef.current.translateX(BOOK_SPINE_WIDTH);
     frontCoverRef.current.translateZ(BOOK_PAGE_DEPTH + BOOK_COVER_DEPTH / 2);
-    backCoverRef.current.translateX(BOOK_SPINE_WIDTH);
     backCoverRef.current.translateZ(-BOOK_PAGE_DEPTH - BOOK_COVER_DEPTH / 2);
     frontPagesRef.current.translateZ(BOOK_PAGE_DEPTH / 2);
     backPagesRef.current.translateZ(-BOOK_PAGE_DEPTH / 2);
@@ -110,10 +108,10 @@ function Book() {
       const frontTarget = frontPageBones[i];
       const backTarget = backPageBones[i];
 
-      const insideCurveIntensity = i < 10 ? Math.sin(i * 0.3 + 0.25) : 0;
+      const insideCurveIntensity =
+        i < Math.floor(BOOK_PAGE_SEGMENTS / 4) ? Math.sin(i / 5 + 0.15) : 0.1;
       const rotationAngle =
         INSIDE_CURVE_STRENGTH * insideCurveIntensity * targetRotation;
-      const backRotationAngle = -1 * rotationAngle;
 
       frontTarget.rotation.y = MathUtils.lerp(
         frontTarget.rotation.y,
@@ -123,20 +121,62 @@ function Book() {
 
       backTarget.rotation.y = MathUtils.lerp(
         backTarget.rotation.y,
-        backRotationAngle,
+        -rotationAngle,
         LERP_FACTOR
       );
 
-      if (i > 10) {
+      if (i > 10 && i < 15) {
         frontTarget.position.z = MathUtils.lerp(
           frontTarget.position.z,
-          open ? 0.09 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          open ? 0.001 * (i / BOOK_PAGE_SEGMENTS) : 0,
           LERP_FACTOR
         );
 
         backTarget.position.z = MathUtils.lerp(
           backTarget.position.z,
-          open ? -0.09 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          open ? -0.001 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+      } else if (i >= 15 && i < 35) {
+        frontTarget.position.z = MathUtils.lerp(
+          frontTarget.position.z,
+          open ? -0.0001 * (Math.sqrt(i) / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+        backTarget.position.z = MathUtils.lerp(
+          backTarget.position.z,
+          open ? 0.0001 * (Math.sqrt(i) / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+      } else if (i >= 35) {
+        frontTarget.position.x = MathUtils.lerp(
+          frontTarget.position.x,
+          open ? 0.07 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+        backTarget.position.x = MathUtils.lerp(
+          backTarget.position.x,
+          open ? 0.07 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+        frontTarget.position.y = MathUtils.lerp(
+          frontTarget.position.y,
+          open ? -0.015 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+        backTarget.position.y = MathUtils.lerp(
+          backTarget.position.y,
+          open ? -0.015 * (i / BOOK_PAGE_SEGMENTS) : 0,
+          LERP_FACTOR
+        );
+        frontTarget.rotation.y = MathUtils.lerp(
+          frontTarget.rotation.y,
+          open ? (0.12 * i) / BOOK_PAGE_SEGMENTS : 0,
+          LERP_FACTOR
+        );
+        backTarget.rotation.y = MathUtils.lerp(
+          backTarget.rotation.y,
+          open ? (-0.12 * i) / BOOK_PAGE_SEGMENTS : 0,
           LERP_FACTOR
         );
       }

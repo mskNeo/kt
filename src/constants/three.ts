@@ -25,9 +25,9 @@ export const BOOK_COVER_DEPTH = 0.05 * SCALE_FACTOR;
 
 // Book Page Dimensions
 export const BOOK_PAGE_HEIGHT = 1.45 * SCALE_FACTOR;
-export const BOOK_PAGE_WIDTH = 1.15 * SCALE_FACTOR;
+export const BOOK_PAGE_WIDTH = 1.175 * SCALE_FACTOR;
 export const BOOK_PAGE_DEPTH = 0.15 * SCALE_FACTOR;
-export const BOOK_PAGE_SEGMENTS = 30;
+export const BOOK_PAGE_SEGMENTS = 50;
 export const BOOK_PAGE_SEGMENT_WIDTH = BOOK_PAGE_WIDTH / BOOK_PAGE_SEGMENTS;
 
 // Book Spine Dimensions
@@ -38,3 +38,6 @@ export const BOOK_SPINE_DEPTH = 2 * (BOOK_PAGE_DEPTH + BOOK_COVER_DEPTH);
 // constants for book turning animations
 export const LERP_FACTOR = 0.05;
 export const INSIDE_CURVE_STRENGTH = 0.1;
+
+// colors for book
+export const COVER_COLOR = "#027d6f";

@@ -7,7 +7,7 @@ function SceneCanvas() {
   return (
     <Canvas shadows>
       <MemoBook />
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       <Environment preset="studio" />
     </Canvas>
   );

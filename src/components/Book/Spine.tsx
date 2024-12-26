@@ -3,6 +3,7 @@ import "@react-three/fiber";
 import { Group, Object3DEventMap } from "three";
 import { SpineGeometry } from "components/Geometries/Spine";
 import { useTexture } from "@react-three/drei";
+import { COVER_COLOR } from "constants/three";
 
 const Spine = forwardRef((props, ref: React.Ref<Group<Object3DEventMap>>) => {
   const colorMap = useTexture("textures/fabric_leather_02_diff_1k.jpg");
@@ -15,7 +16,7 @@ const Spine = forwardRef((props, ref: React.Ref<Group<Object3DEventMap>>) => {
   return (
     <group {...props} ref={ref}>
       <mesh geometry={SpineGeometry}>
-        <meshStandardMaterial map={colorMap} color="#004a3a" />
+        <meshStandardMaterial map={colorMap} color={COVER_COLOR} />
       </mesh>
     </group>
   );

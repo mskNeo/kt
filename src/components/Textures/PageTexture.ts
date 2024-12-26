@@ -1,6 +1,6 @@
 import { CanvasTexture } from "three";
 
-function makePageTexture(rotationAngle?: number) {
+function makePageSideTexture(rotationAngle?: number) {
   // Create a canvas and draw lines
   const canvas = document.createElement("canvas");
   const size = 256; // Canvas size
@@ -23,7 +23,7 @@ function makePageTexture(rotationAngle?: number) {
 
   // Draw lines
   ctx.strokeStyle = "#000000"; // Line color
-  ctx.lineWidth = 2; // Line width
+  ctx.lineWidth = 5; // Line width
   const spacing = 10; // Spacing between lines
 
   for (let y = 0; y < size; y += spacing) {
@@ -39,4 +39,4 @@ function makePageTexture(rotationAngle?: number) {
   return texture;
 }
 
-export { makePageTexture };
+export { makePageSideTexture };
