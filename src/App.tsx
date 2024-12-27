@@ -1,8 +1,8 @@
-import { useRef } from "react";
+import { Profiler, useRef } from "react";
 import MouseTrail from "components/MouseTrail/MouseTrail";
 
 import "styles/App.css";
-import { MemoCanvas } from "components/Canvas";
+import SceneCanvas, { MemoCanvas } from "components/Canvas";
 import { useAtom } from "jotai";
 import { isOpenAtom } from "store/BookStore";
 
@@ -10,11 +10,33 @@ export default function App() {
   const mainContainerRef = useRef(null);
   const [open, setOpen] = useAtom(isOpenAtom);
 
+  const onRenderCallback: React.ProfilerOnRenderCallback = (
+    id: string, // the "id" prop of the Profiler tree that has just committed
+    phase: "mount" | "update" | "nested-update", // either "mount" (initial render) or "update" (re-render)
+    actualDuration: number, // time spent rendering the committed update
+    baseDuration: number, // estimated time to render the entire subtree without memoization
+    startTime: number, // when React began rendering this update
+    commitTime: number // when React committed this update
+  ) => {
+    console.info("Profiler Log:");
+    console.info(`Component ID: ${id}`);
+    console.info(`Render phase: ${phase}`);
+    console.info(`Actual render time: ${actualDuration}ms`);
+    console.info(`Base render time: ${baseDuration}ms`);
+    console.info(`Render start time: ${startTime}ms`);
+    console.info(`Commit time: ${commitTime}ms`);
+  };
+
   return (
     <main ref={mainContainerRef}>
-      <MouseTrail parentRef={mainContainerRef} />
-      <MemoCanvas />
-      <button onClick={() => setOpen(!open)}>{open ? "Close" : "Open"}</button>
+      <Profiler id="scene" onRender={onRenderCallback}>
+        <MouseTrail parentRef={mainContainerRef} />
+        <SceneCanvas />
+        {/* <MemoCanvas /> */}
+        <button onClick={() => setOpen(!open)}>
+          {open ? "Close" : "Open"}
+        </button>
+      </Profiler>
     </main>
   );
 }

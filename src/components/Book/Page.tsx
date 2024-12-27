@@ -11,7 +11,7 @@ import {
   SkinnedMesh,
 } from "three";
 
-const PageSet = forwardRef(
+export const PageSet = forwardRef(
   (
     props,
     ref: React.Ref<

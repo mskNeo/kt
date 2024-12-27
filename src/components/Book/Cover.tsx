@@ -5,7 +5,7 @@ import { CoverGeometry } from "components/Geometries/Cover";
 import { useTexture } from "@react-three/drei";
 import { COVER_COLOR } from "constants/three";
 
-const Cover = forwardRef((props, ref: React.Ref<Group>) => {
+export const Cover = forwardRef((props, ref: React.Ref<Group>) => {
   const textureMap = useTexture("textures/fabric_leather_02_rough_1k-min.jpg");
 
   return (

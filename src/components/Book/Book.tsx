@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "@react-three/fiber";
-import { MemoCover } from "./Cover";
-import { MemoPageSet } from "./Page";
+import { Cover, MemoCover } from "./Cover";
+import { MemoPageSet, PageSet } from "./Page";
 import { useFrame } from "@react-three/fiber";
 import {
   BoxGeometry,
@@ -14,7 +14,7 @@ import {
 } from "three";
 import { useAtom } from "jotai";
 import { isOpenAtom } from "store/BookStore";
-import { MemoSpine } from "./Spine";
+import { MemoSpine, Spine } from "./Spine";
 import {
   BOOK_COVER_DEPTH,
   BOOK_COVER_WIDTH,
@@ -24,7 +24,7 @@ import {
   LERP_FACTOR,
 } from "constants/three";
 
-function Book() {
+export default function Book() {
   const [open, _] = useAtom(isOpenAtom);
 
   const groupRef = useRef<Group>(null);
@@ -146,11 +146,16 @@ function Book() {
 
   return (
     <group ref={groupRef}>
-      <MemoCover ref={frontCoverRef} />
+      <Cover ref={frontCoverRef} />
+      <PageSet ref={frontPagesRef} />
+      <PageSet ref={backPagesRef} />
+      <Spine ref={spineRef} />
+      <Cover ref={backCoverRef} />
+      {/* <MemoCover ref={frontCoverRef} />
       <MemoPageSet ref={frontPagesRef} />
       <MemoPageSet ref={backPagesRef} />
       <MemoSpine ref={spineRef} />
-      <MemoCover ref={backCoverRef} />
+      <MemoCover ref={backCoverRef} /> */}
     </group>
   );
 }
