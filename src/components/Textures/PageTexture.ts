@@ -1,4 +1,4 @@
-import { CanvasTexture } from "three";
+import { CanvasTexture, TextureLoader } from "three";
 
 function makePageSideTexture(rotationAngle?: number) {
   // Create a canvas and draw lines
@@ -39,4 +39,6 @@ function makePageSideTexture(rotationAngle?: number) {
   return texture;
 }
 
-export { makePageSideTexture };
+const pageTexture = new TextureLoader().load("textures/paper.webp");
+
+export { pageTexture, makePageSideTexture };

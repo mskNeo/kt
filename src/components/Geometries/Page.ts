@@ -1,4 +1,7 @@
-import { makePageSideTexture } from "components/Textures/PageTexture";
+import {
+  makePageSideTexture,
+  pageTexture,
+} from "components/Textures/PageTexture";
 import {
   BOOK_PAGE_DEPTH,
   BOOK_PAGE_HEIGHT,
@@ -10,8 +13,6 @@ import {
   BoxGeometry,
   Float32BufferAttribute,
   MeshBasicMaterial,
-  MeshStandardMaterial,
-  TextureLoader,
   Uint16BufferAttribute,
   Vector3,
 } from "three";
@@ -49,8 +50,6 @@ PageGeometry.setAttribute(
   "skinWeight",
   new Float32BufferAttribute(skinWeights, 4)
 );
-
-const pageTexture = new TextureLoader().load("textures/paper.webp");
 
 const pageMaterials = [
   // right
