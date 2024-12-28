@@ -2,14 +2,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   color-scheme: light dark;
-  --primary-background: #cab981;
-  --secondary-background: #70683b;
-  --fantasy-red: #81231e;
-  --fantasy-green: #19441b;
-  --emerald-green: #00674f;
-  --book-cover: var(--fantasy-red);
-  --green-cover-font-color: #5e625a;
-  --text-font: #1f1e17;
 
   color: rgba(255, 255, 255, 0.87);
   /* background-color: #242424; */

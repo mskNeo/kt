@@ -20,5 +20,3 @@ export const Cover = forwardRef((props, ref: React.Ref<Group>) => {
     </group>
   );
 });
-
-export const MemoCover = React.memo(Cover);

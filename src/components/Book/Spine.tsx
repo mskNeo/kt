@@ -24,5 +24,3 @@ export const Spine = forwardRef(
     );
   }
 );
-
-export const MemoSpine = React.memo(Spine);

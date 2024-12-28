@@ -48,5 +48,3 @@ export const PageSet = forwardRef(
     );
   }
 );
-
-export const MemoPageSet = React.memo(PageSet);

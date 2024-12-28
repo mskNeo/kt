@@ -1,10 +1,10 @@
 import { Profiler, useRef } from "react";
 import MouseTrail from "components/MouseTrail/MouseTrail";
-
-import "styles/App.css";
-import SceneCanvas, { MemoCanvas } from "components/Canvas";
+import SceneCanvas from "components/Canvas";
 import { useAtom } from "jotai";
 import { isOpenAtom } from "store/BookStore";
+import Modal from "components/Content/Modal";
+import "styles/App.css";
 
 export default function App() {
   const mainContainerRef = useRef(null);
@@ -29,14 +29,13 @@ export default function App() {
 
   return (
     <main ref={mainContainerRef}>
-      <Profiler id="scene" onRender={onRenderCallback}>
-        <MouseTrail parentRef={mainContainerRef} />
-        <SceneCanvas />
-        {/* <MemoCanvas /> */}
-        <button onClick={() => setOpen(!open)}>
-          {open ? "Close" : "Open"}
-        </button>
-      </Profiler>
+      <MouseTrail parentRef={mainContainerRef} />
+
+      {/* <Profiler id="scene" onRender={onRenderCallback}> */}
+      <SceneCanvas />
+      <button onClick={() => setOpen(!open)}>{open ? "Close" : "Open"}</button>
+      <Modal />
+      {/* </Profiler> */}
     </main>
   );
 }

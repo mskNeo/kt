@@ -1,9 +1,0 @@
-.book-cover {
-  height: 90dvh;
-  width: calc(90dvh / 1.5);
-}
-
-#inner, #outer {
-  background: #1b6a6e;
-  position: fixed;
-}

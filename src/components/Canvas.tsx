@@ -1,5 +1,4 @@
-import React from "react";
-import Book, { MemoBook } from "./Book/Book";
+import Book from "./Book/Book";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 
@@ -13,5 +12,3 @@ export default function SceneCanvas() {
     </Canvas>
   );
 }
-
-export const MemoCanvas = React.memo(SceneCanvas);
