@@ -23,9 +23,11 @@ import {
   INSIDE_CURVE_STRENGTH,
   LERP_FACTOR,
 } from "constants/three";
+import { useMediaQuery } from "react-responsive";
 
 export default function Book() {
-  const [open, _] = useAtom(isOpenAtom);
+  const [open] = useAtom(isOpenAtom);
+  const isLandscape = useMediaQuery({ query: "(orientation: landscape) " });
 
   const groupRef = useRef<Group>(null);
   const frontCoverRef = useRef<Group>(null);
@@ -61,22 +63,18 @@ export default function Book() {
       return;
 
     const targetRotation = open ? -Math.PI / 2 : 0;
-    const verticalRotation = open ? -Math.PI / 4 : 0;
-    const groupTranslation = open ? 0 : -BOOK_COVER_WIDTH / 2;
-
-    // bounce the group vertically infinitely?
+    const zoomPosition = open ? (isLandscape ? 3 : 2.7) : 0;
+    const groupTranslation = open && isLandscape ? 0 : -BOOK_COVER_WIDTH / 2;
 
     groupRef.current.position.setX(
       MathUtils.lerp(groupRef.current.position.x, groupTranslation, LERP_FACTOR)
     );
+    groupRef.current.position.setZ(
+      MathUtils.lerp(groupRef.current.position.z, zoomPosition, LERP_FACTOR)
+    );
 
-    // rotate group
     const newRotationVector = new Vector3(
-      MathUtils.lerp(
-        groupRef.current.rotation.x,
-        verticalRotation,
-        LERP_FACTOR
-      ),
+      0,
       MathUtils.lerp(groupRef.current.rotation.y, targetRotation, LERP_FACTOR),
       0
     );

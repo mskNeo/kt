@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Tangerine";
+  src: url("/fonts/Tangerine/Tangerine-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Tangerine";
+  src: url("/fonts/Tangerine/Tangerine-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
