@@ -1,0 +1,14 @@
+.firstWord {
+  font-family: "Unifraktur Maguntia";
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+.firstLetter {
+  font-size: 4rem;
+}
+
+.text {
+  font-family: "Tangerine";
+  font-size: 2rem;
+}

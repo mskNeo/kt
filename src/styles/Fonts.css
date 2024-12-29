@@ -18,3 +18,8 @@
   font-family: "Eagle Lake";
   src: url("/fonts/Eagle_Lake/EagleLake-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Unifraktur Maguntia";
+  src: url("/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf") format("truetype");
+}
