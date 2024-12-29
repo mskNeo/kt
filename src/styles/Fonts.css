@@ -8,3 +8,13 @@
   src: url("/fonts/Tangerine/Tangerine-Bold.ttf") format("truetype");
   font-weight: bold;
 }
+
+@font-face {
+  font-family: "Parisienne";
+  src: url("/fonts/Parisienne/Parisienne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Eagle Lake";
+  src: url("/fonts/Eagle_Lake/EagleLake-Regular.ttf") format("truetype");
+}

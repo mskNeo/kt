@@ -39,6 +39,11 @@ function makePageSideTexture(rotationAngle?: number) {
   return texture;
 }
 
-const pageTexture = new TextureLoader().load("textures/paper.webp");
+const RightPageTexture = new TextureLoader().load(
+  "textures/PageFrameVines.jpg"
+);
+const LeftPageTexture = new TextureLoader().load(
+  "textures/PageFrameVinesFlipped.jpg"
+);
 
-export { pageTexture, makePageSideTexture };
+export { RightPageTexture, LeftPageTexture, makePageSideTexture };

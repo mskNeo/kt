@@ -21,6 +21,7 @@ export default function Modal() {
     firstRender = false;
   };
 
+  // TODO: make modal size of book when open
   return (
     <div
       id={styles.modal}

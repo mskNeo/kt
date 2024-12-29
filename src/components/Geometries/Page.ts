@@ -1,6 +1,7 @@
 import {
+  LeftPageTexture,
   makePageSideTexture,
-  pageTexture,
+  RightPageTexture,
 } from "components/Textures/PageTexture";
 import {
   BOOK_PAGE_DEPTH,
@@ -70,11 +71,11 @@ const pageMaterials = [
   }),
   // front
   new MeshBasicMaterial({
-    map: pageTexture,
+    map: RightPageTexture,
   }),
   // back
   new MeshBasicMaterial({
-    map: pageTexture,
+    map: LeftPageTexture,
   }),
 ];
 

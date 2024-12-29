@@ -20,6 +20,7 @@ import {
   BOOK_COVER_WIDTH,
   BOOK_PAGE_DEPTH,
   BOOK_PAGE_SEGMENTS,
+  BOOK_PAGE_WIDTH,
   INSIDE_CURVE_STRENGTH,
   LERP_FACTOR,
 } from "constants/three";
@@ -47,7 +48,7 @@ export default function Book() {
     backCoverRef.current?.translateZ(-BOOK_PAGE_DEPTH - BOOK_COVER_DEPTH / 2);
     frontPagesRef.current?.translateZ(BOOK_PAGE_DEPTH / 2);
     backPagesRef.current?.translateZ(-BOOK_PAGE_DEPTH / 2);
-    groupRef.current?.translateX(-BOOK_COVER_WIDTH / 2);
+    groupRef.current?.translateX(-BOOK_PAGE_WIDTH / 2);
   }, []);
 
   // here, we want to control the animations for both the cover and page
@@ -62,9 +63,12 @@ export default function Book() {
     )
       return;
 
+    // TODO: animate page turn
+
     const targetRotation = open ? -Math.PI / 2 : 0;
-    const zoomPosition = open ? (isLandscape ? 3 : 2.7) : 0;
-    const groupTranslation = open && isLandscape ? 0 : -BOOK_COVER_WIDTH / 2;
+    const verticalRotation = open ? -Math.PI / 4 : 0;
+    const zoomPosition = open ? (isLandscape ? 2 : 1.8) : 0;
+    const groupTranslation = open && isLandscape ? 0 : -BOOK_PAGE_WIDTH / 2;
 
     groupRef.current.position.setX(
       MathUtils.lerp(groupRef.current.position.x, groupTranslation, LERP_FACTOR)
@@ -75,6 +79,11 @@ export default function Book() {
 
     const newRotationVector = new Vector3(
       0,
+      // MathUtils.lerp(
+      //   groupRef.current.rotation.x,
+      //   verticalRotation,
+      //   LERP_FACTOR
+      // ),
       MathUtils.lerp(groupRef.current.rotation.y, targetRotation, LERP_FACTOR),
       0
     );
@@ -113,7 +122,7 @@ export default function Book() {
     ) => {
       for (let i = 0; i < bones.length; i++) {
         const target = bones[i];
-        const insideCurveIntensity = i < 12 ? Math.sin(i / 5 + 0.1) : 0.1;
+        const insideCurveIntensity = i < 15 ? Math.sin(i / 5 + 0.3) : 0;
         const rotationAngle =
           INSIDE_CURVE_STRENGTH * insideCurveIntensity * targetRotation;
 
@@ -123,20 +132,20 @@ export default function Book() {
           LERP_FACTOR
         );
 
-        if (i >= 46) {
-          target.position.setX(
-            MathUtils.lerp(
-              target.position.x,
-              open ? 0.12 * (i / BOOK_PAGE_SEGMENTS) : 0,
-              LERP_FACTOR
-            )
-          );
-          target.rotation.y = MathUtils.lerp(
-            target.rotation.y,
-            open ? (direction * (0.2 * i)) / BOOK_PAGE_SEGMENTS : 0,
-            LERP_FACTOR
-          );
-        }
+        // if (i >= 46) {
+        //   target.position.setX(
+        //     MathUtils.lerp(
+        //       target.position.x,
+        //       open ? 0.12 * (i / BOOK_PAGE_SEGMENTS) : 0,
+        //       LERP_FACTOR
+        //     )
+        //   );
+        //   target.rotation.y = MathUtils.lerp(
+        //     target.rotation.y,
+        //     open ? (direction * (0.18 * i)) / BOOK_PAGE_SEGMENTS : 0,
+        //     LERP_FACTOR
+        //   );
+        // }
       }
     };
 

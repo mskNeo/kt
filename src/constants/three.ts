@@ -19,8 +19,8 @@ const SCALE_FACTOR = 2;
 
 /** Book Constants */
 // Book Cover Dimensions
-export const BOOK_COVER_HEIGHT = 1.5 * SCALE_FACTOR;
-export const BOOK_COVER_WIDTH = 1.2 * SCALE_FACTOR;
+export const BOOK_COVER_HEIGHT = 1.7 * SCALE_FACTOR;
+export const BOOK_COVER_WIDTH = 1.3 * SCALE_FACTOR;
 export const BOOK_COVER_DEPTH = 0.05 * SCALE_FACTOR;
 
 // Book Page Dimensions

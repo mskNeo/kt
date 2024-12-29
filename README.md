@@ -34,3 +34,4 @@ export default {
 ## Book
 - Bounce book when unopened?
 - Allow book to be rotated when unopened? and when opened then reset book and do opening animation?
+- Page Turn animation
